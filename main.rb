@@ -50,13 +50,22 @@ end
 
 get '/is_wise/id/:id' do
   student = Student.find(params[:id])
-  student.ultra_wise? ? "yes" : "no"  # this is another way to write an if else                                             statement. Look it up. 
+  student.ultra_wise? ? "yes" : "no"  # another way to write an if else statement.
 end
 
 get '/can_drink/id/:id' do
   student = Student.find(params[:id])
   student.can_drink? ? "yes" : "no"
 end
+
+get '/drink_wise/id/:id' do
+  student = Student.find(params[:id])
+  drink = student.can_drink? ? "yes" : "no"
+  wise = student.ultra_wise? ? "yes" : "no"
+  student_hash={"name" => student.name, "github" => student.github, "drink" => drink, "wise" => wise}
+  student_hash.to_json  
+end
+
 
 # Afternoon Assignment:
 
