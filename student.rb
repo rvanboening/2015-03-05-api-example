@@ -16,6 +16,15 @@ class Student
     age >= 1000
   end
   
+  def insert
+    DATABASE.execute("INSERT INTO students (name, age, github) VALUES ('#{name}', #{age}, '#{github}')")
+    @id = DATABASE.last_insert_row_id
+  end
+  
+  def delete
+    DATABASE.execute("DELETE FROM students WHERE id = #{id}")
+  end
+  
   def github_link
     "http://github.com/#{github}"
   end
@@ -49,4 +58,25 @@ class Student
       github: github
     }
   end
+  
+  def edit_student_name
+    DATABASE.execute("UPDATE students SET name ='#{@name}' WHERE id = #{@id}") 
+  end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

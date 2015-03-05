@@ -18,11 +18,44 @@ get "/students" do
   students_hash.to_json
 end
 
+get "/students/:id/new_name/:newname" do
+  id = params[:id].to_i
+  name = params[:newname]
+  student = Student.new({"id" => id, "name" => name})
+  student.edit_student_name
+end
+
 get "/students/:id" do
   student = Student.find(params[:id])
 
-  student_hash = student.to_hash
+  student.edit_student_name
   student_hash.to_json
+end
+
+get '/new_student/name/:name/age/:age/github/:github' do
+  name = params[:name]
+  age = params[:age].to_i
+  github = params[:github]
+  student = Student.new({"name" => name, "age" => age, "github" => github})
+  student.insert
+  redirect to("/")
+end
+
+get '/delete_student/id/:id' do
+  id = params[:id]
+  student=Student.new({"id" => id})
+  student.delete
+  redirect to("/")
+end
+
+get '/is_wise/id/:id' do
+  student = Student.find(params[:id])
+  student.ultra_wise? ? "yes" : "no"  # this is another way to write an if else                                             statement. Look it up. 
+end
+
+get '/can_drink/id/:id' do
+  student = Student.find(params[:id])
+  student.can_drink? ? "yes" : "no"
 end
 
 # Afternoon Assignment:
