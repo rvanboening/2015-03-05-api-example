@@ -27,9 +27,7 @@ end
 
 get "/students/:id" do
   student = Student.find(params[:id])
-
-  student.edit_student_name
-  student_hash.to_json
+  student.to_hash.to_json
 end
 
 get '/new_student/name/:name/age/:age/github/:github' do
