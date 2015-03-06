@@ -34,6 +34,39 @@ window.onload = function(){
     js_req.open("get","http://localhost:4567/students/"+id);
     js_req.send();
   }
+  
+  document.getElementById("studentWise").onclick = student_wise;
+  function student_wise() {
+    var id = prompt("What is the student ID?");
+    var js_req = new XMLHttpRequest;
+    js_req.addEventListener("load", function() {
+      document.getElementById("results").innerHTML = js_req.response;
+    });
+    js_req.open("get","http://localhost:4567/is_wise/id/" +id);
+    js_req.send();
+  }
+  
+  document.getElementById("studentDrink").onclick = student_drink;
+  function student_drink() {
+    var id = prompt("What is the student ID?");
+    var js_req = new XMLHttpRequest;
+    js_req.addEventListener("load", function() {
+      document.getElementById("results").innerHTML = js_req.response;
+    });
+    js_req.open("get","http://localhost:4567/can_drink/id/" +id);
+    js_req.send();
+  }
+  
+  document.getElementById("drinkWise").onclick = drink_wise;
+  function drink_wise() {
+    var id = prompt("What is the student ID?");
+    var js_req = new XMLHttpRequest;
+    js_req.addEventListener("load", function() {
+      document.getElementById("results").innerHTML = js_req.response;
+    });
+    js_req.open("get","http://localhost:4567/drink_wise/id/" +id);
+    js_req.send();
+  }
 }
 
 
